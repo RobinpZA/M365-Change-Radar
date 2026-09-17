@@ -1,0 +1,39 @@
+name: Update feeds
+
+on:
+  schedule:
+    # 05:17 UTC (~07:17 SAST). Off the hour: the schedule event is delayed
+    # during the load spike at the top of every hour.
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-feeds
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Refresh feeds
+        shell: pwsh
+        run: ./scripts/Update-Feeds.ps1
+
+      - name: Commit updated data
+        run: |
+          if [ -z "$(git status --porcelain docs/data)" ]; then
+            echo "No feed changes."
+            exit 0
+          fi
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/data
+          git commit -m 'chore: refresh update feeds'
+          git push

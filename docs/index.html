@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M365 Change Radar</title>
+<meta name="description" content="A single index of Microsoft 365, Entra, Azure and Graph changes, rebuilt daily from the official public feeds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23241c16'/><rect x='5' y='20' width='4' height='7' fill='%23f08a3c'/><rect x='13' y='13' width='4' height='14' fill='%23f08a3c'/><rect x='21' y='6' width='4' height='21' fill='%23f08a3c'/></svg>">
+</head>
+<body>
+
+<header class="masthead">
+  <a class="wordmark" href="./">M365 Change Radar</a>
+  <p class="masthead__meta">
+    <span id="meta-lastrun">loading…</span>
+    <span class="masthead__sep" aria-hidden="true">/</span>
+    <span id="meta-health"></span>
+  </p>
+</header>
+
+<main id="main">
+
+  <section class="lede">
+    <h1 class="lede__title">Everything Microsoft changed, in one list.</h1>
+    <p class="lede__text">
+      Roadmap, Azure Updates, Tech Community, the Graph changelog and SDK releases —
+      collected from the official public feeds and rebuilt every morning.
+      No tenant data, no sign-in.
+    </p>
+
+    <ul class="summary" id="digest" hidden>
+      <li>
+        <button class="summary__item" data-digest="new" type="button">
+          <span class="summary__n" id="digest-new">0</span>
+          <span class="summary__label">new for you</span>
+        </button>
+      </li>
+      <li>
+        <button class="summary__item" data-digest="moved" type="button">
+          <span class="summary__n" id="digest-moved">0</span>
+          <span class="summary__label">moved this week</span>
+        </button>
+      </li>
+      <li>
+        <button class="summary__item" data-digest="retirement" type="button">
+          <span class="summary__n" id="digest-retire">0</span>
+          <span class="summary__label">retiring (90d)</span>
+        </button>
+      </li>
+    </ul>
+  </section>
+
+  <div class="index-layout">
+
+    <aside class="rail" aria-label="Filters">
+      <div class="rail__inner">
+
+        <div class="field">
+          <label class="field__label" for="search">Search</label>
+          <input type="search" id="search" class="field__input" placeholder="title or summary"
+                 autocomplete="off" spellcheck="false">
+          <p class="field__hint"><kbd>/</kbd> to focus</p>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="filter-window">Window</label>
+          <select id="filter-window" class="field__input">
+            <option value="7">Last 7 days</option>
+            <option value="30" selected>Last 30 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="365">Last year</option>
+            <option value="0">All time</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="filter-product">Product</label>
+          <select id="filter-product" class="field__input">
+            <option value="">Everything</option>
+          </select>
+        </div>
+
+        <fieldset class="field">
+          <legend class="field__label">Source</legend>
+          <div class="chips" id="kind-chips">
+            <button class="chip" data-kind="roadmap" type="button">Roadmap</button>
+            <button class="chip" data-kind="azure" type="button">Azure</button>
+            <button class="chip" data-kind="techcommunity" type="button">Blogs</button>
+            <button class="chip" data-kind="graph-changelog" type="button">Graph</button>
+            <button class="chip" data-kind="releases" type="button">Releases</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend class="field__label">Status</legend>
+          <div class="chips" id="status-chips">
+            <button class="chip" data-status="In development" type="button">In development</button>
+            <button class="chip" data-status="Rolling out" type="button">Rolling out</button>
+            <button class="chip" data-status="Launched" type="button">Launched</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend class="field__label">Also include</legend>
+          <div class="chips" id="flag-chips">
+            <button class="chip" data-flag="retirement" type="button">Retiring</button>
+            <button class="chip" data-flag="moved" type="button">Moved this week</button>
+            <button class="chip" data-flag="new" type="button">New to me</button>
+          </div>
+          <p class="field__hint">Added to the status results, not narrowed by them.</p>
+        </fieldset>
+
+        <button type="button" class="btn-reset" id="reset">Clear filters</button>
+      </div>
+    </aside>
+
+    <section class="index" aria-label="Updates">
+      <p class="index__count" id="result-count"></p>
+      <div id="feed"></div>
+      <p class="index__empty" id="empty" hidden>Nothing matches those filters.</p>
+      <div class="index__more">
+        <button class="btn-more" id="load-more" hidden>Load more</button>
+      </div>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="foot-line">
+  <p>
+    Public Microsoft feeds only · rebuilt daily by GitHub Actions ·
+    <a href="https://github.com/RobinpZA/M365-Change-Radar">source</a> ·
+    MIT · Robin Pieterse · Turrito Networks
+  </p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

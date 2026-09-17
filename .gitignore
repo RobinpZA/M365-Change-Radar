@@ -1,0 +1,5 @@
+config/settings.local.json
+*.local.json
+.vscode/
+Output/
+*.log

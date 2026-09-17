@@ -1,0 +1,199 @@
+{
+  "$comment": "Feed definitions for M365 Change Radar. type drives parsing: rss | atom. Tech Community board.id slugs are the path segment after /blog/ in any post URL on that blog - they are NOT guessable, verify with scripts/Test-Sources.ps1 before adding.",
+  "retentionMonths": 18,
+  "sources": [
+    {
+      "id": "roadmap",
+      "name": "M365 Roadmap",
+      "kind": "roadmap",
+      "type": "rss",
+      "product": null,
+      "url": "https://www.microsoft.com/releasecommunications/api/v1/m365/rss",
+      "enabled": true
+    },
+    {
+      "id": "azure-updates",
+      "name": "Azure Updates",
+      "kind": "azure",
+      "type": "rss",
+      "product": "Azure",
+      "url": "https://www.microsoft.com/releasecommunications/api/v2/azure/rss",
+      "enabled": true
+    },
+    {
+      "id": "graph-changelog",
+      "name": "Graph API Changelog",
+      "kind": "graph-changelog",
+      "type": "rss",
+      "product": "Graph",
+      "url": "https://developer.microsoft.com/en-us/graph/changelog/rss",
+      "fallbackLink": "https://developer.microsoft.com/en-us/graph/changelog/",
+      "enabled": true
+    },
+
+    {
+      "id": "blog-entra",
+      "name": "Microsoft Entra Blog",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "Entra",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=microsoft-entra-blog",
+      "enabled": true
+    },
+    {
+      "id": "blog-exchange",
+      "name": "Exchange Team Blog",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "Exchange",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=exchange",
+      "enabled": true
+    },
+    {
+      "id": "blog-teams",
+      "name": "Microsoft Teams Blog",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "Teams",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=microsoftteamsblog",
+      "enabled": true
+    },
+    {
+      "id": "blog-intune-success",
+      "name": "Intune Customer Success",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "Intune",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=intunecustomersuccess",
+      "enabled": true
+    },
+    {
+      "id": "blog-intune",
+      "name": "Microsoft Intune Blog",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "Intune",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=microsoftintuneblog",
+      "enabled": true
+    },
+    {
+      "id": "blog-security",
+      "name": "Microsoft Security Blog",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "Security",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=microsoft-security-blog",
+      "enabled": true
+    },
+    {
+      "id": "blog-defender-o365",
+      "name": "Defender for Office 365",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "Defender",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=microsoftdefenderforoffice365blog",
+      "enabled": true
+    },
+    {
+      "id": "blog-defender-endpoint",
+      "name": "Defender for Endpoint",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "Defender",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=microsoftdefenderatpblog",
+      "enabled": true
+    },
+    {
+      "id": "blog-purview",
+      "name": "Microsoft Purview Blog",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "Purview",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=microsoft-purview-blog",
+      "enabled": true
+    },
+    {
+      "id": "blog-sharepoint",
+      "name": "SharePoint Blog",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "SharePoint",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=spblog",
+      "enabled": true
+    },
+    {
+      "id": "blog-onedrive",
+      "name": "OneDrive Blog",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "OneDrive",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=onedriveblog",
+      "enabled": true
+    },
+    {
+      "id": "blog-m365",
+      "name": "Microsoft 365 Blog",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "Microsoft 365",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=microsoft_365blog",
+      "enabled": true
+    },
+    {
+      "id": "blog-viva",
+      "name": "Microsoft Viva Blog",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "Viva",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=microsoftvivablog",
+      "enabled": true
+    },
+    {
+      "id": "blog-windows-itpro",
+      "name": "Windows IT Pro Blog",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "Windows",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=windows-itpro-blog",
+      "enabled": true
+    },
+    {
+      "id": "blog-azure-governance",
+      "name": "Azure Governance and Management",
+      "kind": "techcommunity",
+      "type": "rss",
+      "product": "Azure",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=azuregovernanceandmanagementblog",
+      "enabled": true
+    },
+
+    {
+      "id": "rel-msgraph-powershell",
+      "name": "Microsoft.Graph PowerShell SDK",
+      "kind": "releases",
+      "type": "atom",
+      "product": "Graph",
+      "url": "https://github.com/microsoftgraph/msgraph-sdk-powershell/releases.atom",
+      "enabled": true
+    },
+    {
+      "id": "rel-az-powershell",
+      "name": "Az PowerShell",
+      "kind": "releases",
+      "type": "atom",
+      "product": "Azure",
+      "url": "https://github.com/Azure/azure-powershell/releases.atom",
+      "enabled": true
+    },
+    {
+      "id": "rel-pnp-powershell",
+      "name": "PnP.PowerShell",
+      "kind": "releases",
+      "type": "atom",
+      "product": "SharePoint",
+      "url": "https://github.com/pnp/powershell/releases.atom",
+      "excludeTitlePattern": "nightly|alpha|rc\\d",
+      "enabled": true
+    }
+  ]
+}

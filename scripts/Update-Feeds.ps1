@@ -198,7 +198,7 @@ $newCount = @($all | Where-Object { $newIds.Contains($_.id) }).Count
 # The seed run stamps every item with the same firstSeen, which would otherwise
 # make the whole backlog look "new" for the first few days. The site treats this
 # baseline timestamp as "always been there".
-$baselineFirstSeen = @($all.firstSeen | Sort-Object) | Select-Object -First 1
+$baselineFirstSeen = @($all.firstSeen | Sort-Object -Property @{ Expression = { [datetime]$_ } }) | Select-Object -First 1
 
 $meta = [PSCustomObject]@{
     generator         = 'M365-Change-Radar'

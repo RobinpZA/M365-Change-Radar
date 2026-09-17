@@ -1,8 +1,8 @@
 {
   "generator": "M365-Change-Radar",
-  "lastRun": "2026-09-17T14:15:19Z",
+  "lastRun": "2026-09-17T19:24:44Z",
   "baselineFirstSeen": "2026-09-17T13:53:45Z",
-  "itemCount": 2676,
+  "itemCount": 2702,
   "newThisRun": 0,
   "statusChanges": 0,
   "retentionMonths": 18,
@@ -65,6 +65,7 @@
     "Planner",
     "Power Automate",
     "PowerPoint",
+    "PowerShell",
     "Purview",
     "Security",
     "SharePoint",
@@ -89,7 +90,7 @@
       "kind": "roadmap",
       "status": "ok",
       "itemCount": 1771,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -98,7 +99,7 @@
       "kind": "azure",
       "status": "ok",
       "itemCount": 200,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -107,7 +108,7 @@
       "kind": "graph-changelog",
       "status": "ok",
       "itemCount": 2620,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -116,7 +117,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -125,7 +126,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -134,7 +135,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -143,7 +144,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -152,7 +153,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -161,7 +162,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -170,7 +171,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -179,7 +180,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -188,7 +189,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -197,7 +198,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -206,7 +207,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -215,7 +216,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -224,7 +225,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -233,7 +234,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -242,7 +243,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -251,7 +252,7 @@
       "kind": "releases",
       "status": "ok",
       "itemCount": 10,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -260,7 +261,7 @@
       "kind": "releases",
       "status": "ok",
       "itemCount": 10,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     },
     {
@@ -269,7 +270,34 @@
       "kind": "releases",
       "status": "ok",
       "itemCount": 0,
-      "lastSuccess": "2026-09-17T14:15:19Z",
+      "lastSuccess": "2026-09-17T19:24:44Z",
+      "error": null
+    },
+    {
+      "id": "rel-powershell",
+      "name": "PowerShell",
+      "kind": "releases",
+      "status": "ok",
+      "itemCount": 8,
+      "lastSuccess": "2026-09-17T19:24:44Z",
+      "error": null
+    },
+    {
+      "id": "rel-exo-powershell",
+      "name": "ExchangeOnlineManagement",
+      "kind": "releases",
+      "status": "ok",
+      "itemCount": 10,
+      "lastSuccess": "2026-09-17T19:24:44Z",
+      "error": null
+    },
+    {
+      "id": "rel-teams-powershell",
+      "name": "MicrosoftTeams",
+      "kind": "releases",
+      "status": "ok",
+      "itemCount": 10,
+      "lastSuccess": "2026-09-17T19:24:44Z",
       "error": null
     }
   ]

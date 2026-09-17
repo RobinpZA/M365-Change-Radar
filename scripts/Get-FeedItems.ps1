@@ -43,14 +43,18 @@ $script:AzureGeneric = @('Feature', 'Features', 'Services', 'Retirements', 'SDK 
 #            carry a verb construction saying the thing itself is going away.
 $script:RetirementTitlePattern = 'retire|retiring|retirement|deprecat|end of support|end-of-support|breaking change|sunset'
 
-$script:RetirementBodyPattern = @(
+$script:RetirementPhrases = @(
     'will be retired', 'will retire', 'is being retired', 'are being retired'
     'has been retired', 'have been retired', 'is retiring', 'are retiring'
     'will be deprecated', 'is deprecated', 'are deprecated', 'deprecation of'
     'end of support for', 'reaches end of support', 'reach end of support'
     'will be removed', 'will no longer be supported', 'will no longer be available'
-    'breaking change'
 ) -join '|'
+
+# In prose, announcing a breaking change means something you rely on is going
+# away. A module changelog uses [BREAKING CHANGE] as a routine per-bullet label
+# on an otherwise ordinary release, so psgallery matches the phrases alone.
+$script:RetirementBodyPattern = "$script:RetirementPhrases|breaking change"
 
 # Tech Community returns HTTP 200 with a stub feed for a board slug that does
 # not exist. This sentinel is the only way to tell a dead slug from an empty blog.
@@ -92,6 +96,38 @@ function ConvertTo-PlainText {
     }
 
     return $text
+}
+
+function Get-CurrentVersionNotes {
+    <#
+    .SYNOPSIS
+        Isolates the current version's entry from a PowerShell Gallery ReleaseNotes field.
+    .DESCRIPTION
+        Some modules (e.g. ExchangeOnlineManagement) concatenate every past
+        release's notes under the current one, banded off by a "Previous
+        Releases:" marker - without this, every historical item would carry
+        its entire release history. Also strips separator lines and the
+        boilerplate "full changelog" link some modules repeat on every version.
+    .PARAMETER Text
+        Raw ReleaseNotes field text.
+    .EXAMPLE
+        Get-CurrentVersionNotes -Text $properties.ReleaseNotes.InnerText
+    #>
+    [CmdletBinding()]
+    param(
+        [AllowNull()]
+        [AllowEmptyString()]
+        [string]$Text
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Text)) { return '' }
+
+    $text = $Text -replace '(?is)-{5,}\s*Previous Releases:.*$', ''
+    $text = $text -replace '(?i)what is new in this release:', ''
+    $text = $text -replace '(?is)-?\s*The complete release notes can be found.*$', ''
+    $text = $text -replace '-{5,}', ''
+
+    return $text.Trim()
 }
 
 function Get-NodeText {
@@ -344,6 +380,13 @@ function Get-FeedItems {
                 continue
             }
 
+            # Some repos wrap the version in boilerplate on every release
+            # ("v7.6.6 Release of PowerShell"); stripping it leaves the bare tag
+            # the name prepend below expects.
+            if ($Source.PSObject.Properties.Name -contains 'stripTitlePattern' -and $Source.stripTitlePattern) {
+                $title = ($title -replace $Source.stripTitlePattern, '').Trim()
+            }
+
             $results.Add([PSCustomObject]@{
                 id           = Get-StableId -SourceId $Source.id -Guid $guid
                 source       = $Source.id
@@ -358,6 +401,61 @@ function Get-FeedItems {
                 targetDate   = $null
                 isRetirement = ($title -match $script:RetirementTitlePattern)
                 tags         = @()
+            }) | Out-Null
+        }
+
+        return $results
+    }
+
+    if ($Source.type -eq 'psgallery') {
+        # PowerShell Gallery's OData feed has one <entry> per published version,
+        # not per release note - the version lives in the entry id URL and the
+        # real per-version publish date is <m:properties><d:Published>, since the
+        # top-level <updated> element is unreliable (identical across versions).
+        $entries = @($doc.feed.entry)
+        if ($entries.Count -eq 0) { throw 'PowerShell Gallery feed contains no entries' }
+
+        foreach ($entry in $entries) {
+            $guid = Get-XmlField -Node $entry -Name 'id'
+            if (-not $guid) { continue }
+
+            $properties = $entry.properties
+            $version = Get-XmlField -Node $properties -Name 'Version'
+            if (-not $version) { continue }
+
+            if ($Source.PSObject.Properties.Name -contains 'excludeTitlePattern' -and
+                $Source.excludeTitlePattern -and $version -match $Source.excludeTitlePattern) {
+                continue
+            }
+
+            $title = "$($Source.name) $version"
+            $notes = Get-CurrentVersionNotes -Text (Get-XmlField -Node $properties -Name 'ReleaseNotes')
+
+            # No title check - the title here is one this function built, so it
+            # can only ever be "<module> <version>". No opening-paragraph window
+            # either: a changelog is a list of discrete claims about this one
+            # release, so a going-away bullet counts wherever it sits.
+            $isRetirement = $notes -match $script:RetirementPhrases
+
+            # Shipping a breaking change is worth surfacing, but it is a property
+            # of a normal release, not a retirement, so it rides as a tag.
+            $tags = @()
+            if ($notes -match 'breaking change') { $tags = @('Breaking change') }
+
+            $results.Add([PSCustomObject]@{
+                id           = Get-StableId -SourceId $Source.id -Guid $guid
+                source       = $Source.id
+                sourceName   = $Source.name
+                kind         = $Source.kind
+                product      = $Source.product
+                title        = $title
+                summary      = ConvertTo-PlainText -Html $notes
+                link         = "https://www.powershellgallery.com/packages/$($Source.packageId)/$version"
+                published    = ConvertTo-UtcString -Value (Get-XmlField -Node $properties -Name 'Published')
+                status       = $null
+                targetDate   = $null
+                isRetirement = $isRetirement
+                tags         = $tags
             }) | Out-Null
         }
 

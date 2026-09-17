@@ -194,6 +194,37 @@
       "url": "https://github.com/pnp/powershell/releases.atom",
       "excludeTitlePattern": "nightly|alpha|rc\\d",
       "enabled": true
+    },
+    {
+      "id": "rel-powershell",
+      "name": "PowerShell",
+      "kind": "releases",
+      "type": "atom",
+      "product": "PowerShell",
+      "url": "https://github.com/PowerShell/PowerShell/releases.atom",
+      "excludeTitlePattern": "-preview|-rc",
+      "stripTitlePattern": "\\s*Release of PowerShell$",
+      "enabled": true
+    },
+    {
+      "id": "rel-exo-powershell",
+      "name": "ExchangeOnlineManagement",
+      "kind": "releases",
+      "type": "psgallery",
+      "product": "Exchange",
+      "packageId": "ExchangeOnlineManagement",
+      "url": "https://www.powershellgallery.com/api/v2/FindPackagesById()?id='ExchangeOnlineManagement'&$filter=IsPrerelease eq false&$orderby=Published desc&$top=10",
+      "enabled": true
+    },
+    {
+      "id": "rel-teams-powershell",
+      "name": "MicrosoftTeams",
+      "kind": "releases",
+      "type": "psgallery",
+      "product": "Teams",
+      "packageId": "MicrosoftTeams",
+      "url": "https://www.powershellgallery.com/api/v2/FindPackagesById()?id='MicrosoftTeams'&$filter=IsPrerelease eq false&$orderby=Published desc&$top=10",
+      "enabled": true
     }
   ]
 }

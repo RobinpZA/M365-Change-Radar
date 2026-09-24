@@ -472,7 +472,27 @@ function Get-FeedItems {
         throw 'RSS feed contains no items'
     }
 
-    $items = @($doc.rss.channel.item)
+    $items = [System.Collections.Generic.List[object]]::new()
+    $items.AddRange(@($doc.rss.channel.item))
+
+    # WordPress feeds (GitHub Changelog) cap at 10 items, which on a busy day
+    # is less than one day's output. Later pages are best-effort: page 1
+    # already proved the feed is alive, so a failure here only stops paging.
+    if ($Source.PSObject.Properties.Name -contains 'pages' -and $Source.pages -gt 1) {
+        $separator = if ($Source.url -match '\?') { '&' } else { '?' }
+        foreach ($page in 2..[int]$Source.pages) {
+            try {
+                $pageDoc = Get-FeedXml -Url "$($Source.url)$($separator)paged=$page" -TimeoutSec $TimeoutSec
+                if ($pageDoc.rss.channel.PSObject.Properties.Name -notcontains 'item') { break }
+                $items.AddRange(@($pageDoc.rss.channel.item))
+            }
+            catch {
+                Write-Verbose "$($Source.id) page $page unavailable: $($_.Exception.Message)"
+                break
+            }
+        }
+    }
+
     foreach ($item in $items) {
         $title = Get-XmlField -Node $item -Name 'title'
         if ([string]::IsNullOrWhiteSpace($title)) { continue }
@@ -533,6 +553,8 @@ function Get-FeedItems {
 
         $isRetirement = ($title -match $script:RetirementTitlePattern) -or
                         ($categories -contains 'Retirements') -or
+                        # GitHub labels each change Release, Improvement, Retired or Deprecation.
+                        ($Source.kind -eq 'github-changelog' -and ($categories -match '^(Retired|Deprecation)$')) -or
                         ($bodyOpening -match $script:RetirementBodyPattern)
 
         $results.Add([PSCustomObject]@{

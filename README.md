@@ -1,6 +1,6 @@
 # M365 Change Radar
 
-One filterable feed of Microsoft ecosystem changes — M365 Roadmap, Azure Updates, Tech Community blogs, the Microsoft Graph API changelog and PowerShell SDK releases — rebuilt daily by GitHub Actions and served as a static site from GitHub Pages.
+One filterable feed of Microsoft ecosystem changes — M365 Roadmap, Azure Updates, Tech Community blogs, Microsoft Dev Blogs, the Microsoft Graph API and GitHub changelogs, and PowerShell SDK releases — rebuilt daily by GitHub Actions and served as a static site from GitHub Pages.
 
 **Live site:** https://robinpza.github.io/M365-Change-Radar/
 

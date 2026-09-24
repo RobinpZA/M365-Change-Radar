@@ -1,5 +1,5 @@
 {
-  "$comment": "Feed definitions for M365 Change Radar. type drives parsing: rss | atom. Tech Community board.id slugs are the path segment after /blog/ in any post URL on that blog - they are NOT guessable, verify with scripts/Test-Sources.ps1 before adding.",
+  "$comment": "Feed definitions for M365 Change Radar. type drives parsing: rss | atom. Tech Community board.id slugs are the path segment after /blog/ in any post URL on that blog - they are NOT guessable, verify with scripts/Test-Sources.ps1 before adding. pages (rss only) also fetches ?paged=2..N for WordPress feeds that only hold a day or two of items.",
   "retentionMonths": 18,
   "sources": [
     {
@@ -28,6 +28,44 @@
       "product": "Graph",
       "url": "https://developer.microsoft.com/en-us/graph/changelog/rss",
       "fallbackLink": "https://developer.microsoft.com/en-us/graph/changelog/",
+      "enabled": true
+    },
+    {
+      "id": "github-changelog",
+      "name": "GitHub Changelog",
+      "kind": "github-changelog",
+      "type": "rss",
+      "product": "GitHub",
+      "url": "https://github.blog/changelog/feed/",
+      "pages": 3,
+      "enabled": true
+    },
+
+    {
+      "id": "devblogs",
+      "name": "Microsoft Developer Blogs",
+      "kind": "devblogs",
+      "type": "rss",
+      "product": "Developer",
+      "url": "https://devblogs.microsoft.com/feed/",
+      "enabled": true
+    },
+    {
+      "id": "devblogs-m365dev",
+      "name": "Microsoft 365 Developer Blog",
+      "kind": "devblogs",
+      "type": "rss",
+      "product": "Microsoft 365",
+      "url": "https://devblogs.microsoft.com/microsoft365dev/feed/",
+      "enabled": true
+    },
+    {
+      "id": "devblogs-powershell",
+      "name": "PowerShell Team Blog",
+      "kind": "devblogs",
+      "type": "rss",
+      "product": "PowerShell",
+      "url": "https://devblogs.microsoft.com/powershell/feed/",
       "enabled": true
     },
 

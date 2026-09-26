@@ -1,9 +1,9 @@
 {
   "generator": "M365-Change-Radar",
-  "lastRun": "2026-09-25T05:28:55Z",
+  "lastRun": "2026-09-26T05:27:40Z",
   "baselineFirstSeen": "2026-09-17T13:53:45Z",
-  "itemCount": 2809,
-  "newThisRun": 16,
+  "itemCount": 2818,
+  "newThisRun": 14,
   "statusChanges": 1,
   "retentionMonths": 18,
   "products": [
@@ -46,7 +46,7 @@
     "Graph",
     "Intune",
     "Microsoft 365",
-    "Microsoft 365 Admin Center",
+    "Microsoft 365 admin center",
     "Microsoft 365 app",
     "Microsoft 365 Defender",
     "Microsoft Agent 365",
@@ -58,6 +58,7 @@
     "Microsoft Entra",
     "Microsoft Information Protection",
     "Microsoft Intune",
+    "Microsoft Power Platform governance and administration",
     "Microsoft Project",
     "Microsoft Purview",
     "Microsoft Teams",
@@ -94,8 +95,8 @@
       "name": "M365 Roadmap",
       "kind": "roadmap",
       "status": "ok",
-      "itemCount": 1796,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "itemCount": 1798,
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -104,7 +105,7 @@
       "kind": "azure",
       "status": "ok",
       "itemCount": 200,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -113,7 +114,7 @@
       "kind": "graph-changelog",
       "status": "ok",
       "itemCount": 2620,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -122,7 +123,7 @@
       "kind": "github-changelog",
       "status": "ok",
       "itemCount": 30,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -131,7 +132,7 @@
       "kind": "devblogs",
       "status": "ok",
       "itemCount": 10,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -140,7 +141,7 @@
       "kind": "devblogs",
       "status": "ok",
       "itemCount": 10,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -149,7 +150,7 @@
       "kind": "devblogs",
       "status": "ok",
       "itemCount": 10,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -158,7 +159,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -167,7 +168,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -176,7 +177,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -185,7 +186,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -194,7 +195,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -203,7 +204,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -212,7 +213,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -221,7 +222,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -230,7 +231,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -239,7 +240,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -248,7 +249,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -257,7 +258,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -266,7 +267,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -275,7 +276,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -284,7 +285,7 @@
       "kind": "techcommunity",
       "status": "ok",
       "itemCount": 20,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -293,7 +294,7 @@
       "kind": "releases",
       "status": "ok",
       "itemCount": 10,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -302,7 +303,7 @@
       "kind": "releases",
       "status": "ok",
       "itemCount": 10,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -311,7 +312,7 @@
       "kind": "releases",
       "status": "ok",
       "itemCount": 0,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -320,7 +321,7 @@
       "kind": "releases",
       "status": "ok",
       "itemCount": 7,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -329,7 +330,7 @@
       "kind": "releases",
       "status": "ok",
       "itemCount": 10,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     },
     {
@@ -338,7 +339,7 @@
       "kind": "releases",
       "status": "ok",
       "itemCount": 10,
-      "lastSuccess": "2026-09-25T05:28:55Z",
+      "lastSuccess": "2026-09-26T05:27:40Z",
       "error": null
     }
   ]

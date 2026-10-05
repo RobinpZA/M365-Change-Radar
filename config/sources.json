@@ -206,6 +206,17 @@
     },
 
     {
+      "id": "partner-center",
+      "name": "Partner Center Announcements",
+      "kind": "partner-center",
+      "type": "learn-announcements",
+      "product": "Partner Center",
+      "url": "https://learn.microsoft.com/en-us/partner-center/announcements/",
+      "monthsBack": 3,
+      "enabled": true
+    },
+
+    {
       "id": "rel-msgraph-powershell",
       "name": "Microsoft.Graph PowerShell SDK",
       "kind": "releases",

@@ -23,7 +23,7 @@ That is deliberate: **a GitHub Pages site is publicly readable even when publish
 
 ```
 config/sources.json              feed definitions
-scripts/Get-FeedItems.ps1        RSS/Atom -> normalised objects
+scripts/Get-FeedItems.ps1        RSS/Atom/PSGallery/Learn pages -> normalised objects
 scripts/Update-Feeds.ps1         fetch, merge with previous run, write JSON
 scripts/Test-Sources.ps1         health check for every feed
 docs/                            GitHub Pages source (Settings -> Pages -> main /docs)
@@ -51,6 +51,10 @@ https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=<slug>
 `<slug>` is the path segment after `/blog/` in any post URL on that blog — for example `https://techcommunity.microsoft.com/blog/microsoft-entra-blog/...` gives `microsoft-entra-blog`.
 
 **Slugs are not guessable.** A dead slug returns HTTP 200 with a stub feed whose channel description reads *"The resource you are trying to access has been deleted or never existed"*; `Get-FeedItems` treats that as a failure. Always confirm a new slug with `Test-Sources.ps1` before committing it.
+
+## Partner Center announcements
+
+Microsoft Learn publishes no feed for [Partner Center announcements](https://learn.microsoft.com/en-us/partner-center/announcements/), so `type: learn-announcements` scrapes the monthly pages (`2026-october`, ...) linked from the index. `monthsBack` (default 3) limits how many are fetched; older items are carried forward from the previous run. The parser relies on the page layout (`<a name="N">` anchor, `<h2>`, Date/Workspace bullets) and fails loudly if it parses zero items.
 
 ## Failure behaviour
 

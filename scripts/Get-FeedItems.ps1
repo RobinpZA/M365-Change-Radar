@@ -333,6 +333,107 @@ function Resolve-AzureCategories {
     }
 }
 
+function Get-LearnAnnouncements {
+    <#
+    .SYNOPSIS
+        Scrapes the Partner Center announcements pages on Microsoft Learn.
+    .DESCRIPTION
+        Learn publishes no feed for these. The index page links one page per
+        month (2026-october); each page holds one <h2> per announcement, preceded
+        by a <a name="N"> anchor and followed by a Date / Workspace / Impacted
+        audience bullet list. Only the newest monthsBack pages are fetched - older
+        items are already in the previous run's output and are carried forward.
+    .PARAMETER Source
+        A sources.json entry of type learn-announcements. url is the index page.
+    .PARAMETER TimeoutSec
+        Request timeout in seconds.
+    .EXAMPLE
+        Get-LearnAnnouncements -Source $source
+    #>
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]$Source,
+        [int]$TimeoutSec = 60
+    )
+
+    $headers = @{ 'User-Agent' = 'M365-Change-Radar/1.0 (+https://github.com/RobinpZA/M365-Change-Radar)' }
+    $base = $Source.url.TrimEnd('/') + '/'
+    $monthsBack = if ($Source.PSObject.Properties.Name -contains 'monthsBack') { [int]$Source.monthsBack } else { 3 }
+
+    $index = Invoke-WebRequest -Uri $base -Headers $headers -TimeoutSec $TimeoutSec -UseBasicParsing -ErrorAction Stop
+    $slugs = @([regex]::Matches($index.Content, 'href="(20\d\d-[a-z]+)(?:#\d+)?"') |
+        ForEach-Object { $_.Groups[1].Value } | Select-Object -Unique | Select-Object -First $monthsBack)
+    if ($slugs.Count -eq 0) { throw 'No monthly announcement pages found on the index page' }
+
+    $results = [System.Collections.Generic.List[PSCustomObject]]::new()
+
+    foreach ($slug in $slugs) {
+        $page = Invoke-WebRequest -Uri "$base$slug" -Headers $headers -TimeoutSec $TimeoutSec -UseBasicParsing -ErrorAction Stop
+        $monthStart = [datetime]::ParseExact($slug, 'yyyy-MMMM', [cultureinfo]::InvariantCulture)
+
+        # Each announcement starts at its <a name="N"> anchor.
+        $sections = [regex]::Split($page.Content, '<p><a name="(?=\d+"></a></p>)')
+        foreach ($section in ($sections | Select-Object -Skip 1)) {
+            if ($section -notmatch '^(\d+)"></a></p>') { continue }
+            $number = $Matches[1]
+
+            if ($section -notmatch '(?s)<h2[^>]*>(.*?)</h2>') { continue }
+            $title = ConvertTo-PlainText -Html $Matches[1] -MaxLength 0
+            if (-not $title) { continue }
+
+            # Cut at the next announcement divider and at the page footer.
+            $body = ($section -split '(?s)<hr>\s*<hr>|<div id="article-metadata-footer"')[0]
+            $body = $body -replace '(?s)^.*?</h2>', ''
+
+            $date = ''; $workspace = ''; $audience = ''
+            if ($body -match '<strong>Date</strong>:\s*([^<]+)') { $date = $Matches[1].Trim() }
+            if ($body -match '<strong>Workspace</strong>:\s*([^<]+)') { $workspace = $Matches[1].Trim() }
+            if ($body -match '<strong>Impacted audience</strong>:\s*([^<]+)') { $audience = $Matches[1].Trim() }
+
+            $published = $null
+            $parsed = [datetime]::MinValue
+            if ([datetime]::TryParse($date, [cultureinfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::AssumeUniversal -bor [System.Globalization.DateTimeStyles]::AdjustToUniversal, [ref]$parsed)) {
+                $published = $parsed.ToString('yyyy-MM-ddT00:00:00Z')
+            }
+            elseif ($date -match '^\w+ \d{4}$' -or -not $date) {
+                # Month-only or missing date: the page's month is the best evidence.
+                $published = $monthStart.ToString('yyyy-MM-ddT00:00:00Z')
+            }
+
+            # The italic lead line is the editorial summary; fall back to the first paragraph.
+            $summary = ''
+            if ($body -match '(?s)<p><em>(.*?)</em></p>') { $summary = ConvertTo-PlainText -Html $Matches[1] }
+            elseif ($body -match '(?s)</ul>\s*<p>(.*?)</p>') { $summary = ConvertTo-PlainText -Html $Matches[1] }
+
+            $opening = ConvertTo-PlainText -Html $body -MaxLength 600
+            $isRetirement = ($title -match $script:RetirementTitlePattern) -or
+                            ($opening -match $script:RetirementBodyPattern)
+
+            # Audience strings can run to a full sentence; only short ones work as chips.
+            $tags = @($workspace, $(if ($audience.Length -le 40) { $audience }) | Where-Object { $_ })
+
+            $results.Add([PSCustomObject]@{
+                id           = Get-StableId -SourceId $Source.id -Guid "$slug#$number|$title"
+                source       = $Source.id
+                sourceName   = $Source.name
+                kind         = $Source.kind
+                product      = $Source.product
+                title        = $title
+                summary      = $summary
+                link         = "$base$slug#$number"
+                published    = $published
+                status       = $null
+                targetDate   = $null
+                isRetirement = [bool]$isRetirement
+                tags         = $tags
+            }) | Out-Null
+        }
+    }
+
+    if ($results.Count -eq 0) { throw 'Announcement pages parsed to zero items - page layout may have changed' }
+    return $results
+}
+
 function Get-FeedItems {
     <#
     .SYNOPSIS
@@ -353,6 +454,10 @@ function Get-FeedItems {
         [Parameter(Mandatory)]$Source,
         [int]$TimeoutSec = 60
     )
+
+    if ($Source.type -eq 'learn-announcements') {
+        return Get-LearnAnnouncements -Source $Source -TimeoutSec $TimeoutSec
+    }
 
     $doc = Get-FeedXml -Url $Source.url -TimeoutSec $TimeoutSec
     $results = [System.Collections.Generic.List[PSCustomObject]]::new()

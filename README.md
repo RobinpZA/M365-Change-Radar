@@ -68,4 +68,4 @@ A source that fails is never fatal. Its previously collected items are kept, the
 
 ## License
 
-MIT · Robin Pieterse · Turrito Networks
+MIT · Robin Pieterse

@@ -124,21 +124,12 @@
       "enabled": true
     },
     {
-      "id": "blog-defender-o365",
-      "name": "Defender for Office 365",
+      "id": "blog-defender",
+      "name": "Microsoft Defender Blog",
       "kind": "techcommunity",
       "type": "rss",
       "product": "Defender",
-      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=microsoftdefenderforoffice365blog",
-      "enabled": true
-    },
-    {
-      "id": "blog-defender-endpoint",
-      "name": "Defender for Endpoint",
-      "kind": "techcommunity",
-      "type": "rss",
-      "product": "Defender",
-      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=microsoftdefenderatpblog",
+      "url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=microsoftthreatprotectionblog",
       "enabled": true
     },
     {

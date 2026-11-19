@@ -1,21 +1,28 @@
-/* Hallmark · genre: atmospheric · macrostructure: Index-First · theme: Midnight
- * tone: utilitarian · anchor hue: 40 · enrichment: none · nav: N9 · footer: Ft2
- * pre-emit critique: P4 H5 E5 S5 R5 V4
- * contrast: pass (40–41) · slop: pass (42–45) · honest: pass (46)
- * chrome: pass (47) · tokens: pass (48) · responsive: pass (49)
- * mobile: pass (34, 49, 50–57) · icons: pass (30)
- *
- * Every colour and font resolves through a token in tokens.css.
- * Outlier face (mono) is confined to two roles: the row metadata line and the
- * summary figures. Gate 38 caps the outlier at two slots.
- */
+/* Hallmark · v2.0.0 · built: the project · redesign: polish · scope: app · genre: atmospheric · theme: custom (warm night, kept from the v1 Midnight build) · macrostructure: Index-First · nav: N9 · footer: Ft2 */
+/* Hallmark · pre-emit critique: P4 H5 E4 S4 R5 V4 · weakest: E, labels were tracked capitals and meta was dot-joined; both now sentence case and spaced */
+/* Hallmark · waive 64 · mono only on the row source, status and date line and the digest counts · feed timestamps and counts read as machine output in a change log */
+/* Hallmark · answered fonts · Geist for the whole page is saturated; kept because the owner chose the warm orange look over Midnight v2 on 2026-11-19 */
+
+/* Every colour and font resolves through a token in tokens.css. */
 
 /* Deliberate overflow safety net. `clip` not `hidden` — hidden creates a
    scroll container and would break the sticky filter rail. */
-html { overflow-x: clip; }
-body { overflow-x: clip; }
+html { overflow-x: clip; scrollbar-color: var(--color-rule-ctl) var(--color-paper); }
+body { overflow-x: clip; caret-color: var(--color-accent); }
 
 * { box-sizing: border-box; }
+
+/* app.js toggles `hidden`; display rules below must not override it. */
+[hidden] { display: none !important; }
+
+::selection { background: var(--color-accent); color: var(--color-accent-ink); }
+
+.noscript {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--space-md) var(--page-gutter);
+  color: var(--color-muted);
+}
 
 body {
   margin: 0;
@@ -72,13 +79,13 @@ kbd {
 .masthead__meta {
   margin: 0;
   display: flex;
-  gap: var(--space-xs);
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-lg);
   font-size: var(--text-xs);
   color: var(--color-neutral);
   font-variant-numeric: tabular-nums;
 }
 
-.masthead__sep { color: var(--color-rule-ctl); }
 .masthead__meta .is-warning { color: var(--color-accent); }
 
 /* ============================================================
@@ -104,7 +111,8 @@ kbd {
   font-style: normal;
   line-height: 1.12;
   letter-spacing: -0.03em;
-  overflow-wrap: anywhere;
+  text-wrap: balance;
+  overflow-wrap: break-word;
   min-width: 0;
 }
 
@@ -202,11 +210,9 @@ legend.field__label {
   display: block;
   padding: 0;
   margin-bottom: var(--space-xs);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-neutral);
+  color: var(--color-muted);
 }
 
 .field__input {
@@ -358,9 +364,7 @@ legend.field__label {
 .row__meta-r { justify-content: flex-end; }
 
 .row__source {
-  color: var(--color-neutral);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  color: var(--color-muted);
   overflow-wrap: anywhere;
 }
 
@@ -374,7 +378,6 @@ legend.field__label {
 .row__flag {
   color: var(--color-accent);
   font-weight: 500;
-  letter-spacing: 0.06em;
 }
 
 .row__title {
@@ -384,7 +387,7 @@ legend.field__label {
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: -0.015em;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   min-width: 0;
 }
 
@@ -424,20 +427,12 @@ legend.field__label {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2xs) var(--space-sm);
+  gap: var(--space-2xs) var(--space-lg);
   margin: var(--space-sm) 0 0;
   padding: 0;
   font-size: var(--text-xs);
   color: var(--color-neutral);
 }
-
-.row__tags li::before {
-  content: '·';
-  margin-right: var(--space-2xs);
-  color: var(--color-rule-ctl);
-}
-
-.row__tags li:first-child::before { content: none; }
 
 /* New-to-me: elevation by lightness. Never a glow shadow on dark. */
 .row.is-new {
@@ -459,6 +454,9 @@ legend.field__label {
 
 .foot-line p {
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-xl);
   font-size: var(--text-xs);
   color: var(--color-neutral);
 }

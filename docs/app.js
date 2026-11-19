@@ -228,7 +228,7 @@
     if (!meta) return;
 
     el('meta-lastrun').textContent =
-      `updated ${relativeDate(meta.lastRun)} · ${meta.itemCount} items`;
+      `updated ${relativeDate(meta.lastRun)}, ${meta.itemCount} items`;
 
     const failed = (meta.sources || []).filter((s) => s.status === 'failed');
     const health = el('meta-health');

@@ -1,80 +1,71 @@
-/* Hallmark · v2.0.0 · built: the project · redesign: polish · scope: app · genre: atmospheric · theme: custom (warm night, kept from the v1 Midnight build) · macrostructure: Index-First · nav: N9 · footer: Ft2 */
-/* Hallmark · pre-emit critique: P4 H5 E4 S4 R5 V4 · weakest: E, labels were tracked capitals and meta was dot-joined; both now sentence case and spaced */
-/* Hallmark · waive 64 · mono only on the row source, status and date line and the digest counts · feed timestamps and counts read as machine output in a change log */
-/* Hallmark · answered fonts · Geist for the whole page is saturated; kept because the owner chose the warm orange look over Midnight v2 on 2026-11-19 */
+/* Hallmark · v2.0.0 · built: the project · redesign: restyle · scope: app · genre: atmospheric · theme: Ribbon (by request) · ribbon: two-in-the-morning + dawn · modes: dark+light · macrostructure: Index-First · nav: N9 · footer: Ft2 */
+/* Hallmark · pre-emit critique: P3 H4 E4 S3 R4 V4 · weakest: S, a sleep theme on a change log; the night band and its lit windows carry the page's own fact, rebuilt every morning */
 
-/* Every colour and font resolves through a token in tokens.css. */
-
-/* Deliberate overflow safety net. `clip` not `hidden` — hidden creates a
-   scroll container and would break the sticky filter rail. */
 html { overflow-x: clip; scrollbar-color: var(--color-rule-ctl) var(--color-paper); }
-body { overflow-x: clip; caret-color: var(--color-accent); }
-
+body { overflow-x: clip; }
 * { box-sizing: border-box; }
 
 /* app.js toggles `hidden`; display rules below must not override it. */
 [hidden] { display: none !important; }
 
-::selection { background: var(--color-accent); color: var(--color-accent-ink); }
-
-.noscript {
-  max-width: var(--page-max);
-  margin: 0 auto;
-  padding: var(--space-md) var(--page-gutter);
-  color: var(--color-muted);
-}
+::selection { background: var(--color-accent-soft); color: var(--color-ink); }
 
 body {
   margin: 0;
   background: var(--color-paper);
   color: var(--color-ink);
+  caret-color: var(--color-accent);
   font-family: var(--font-body);
   font-size: var(--text-base);
-  font-weight: 400;
   line-height: 1.6;
+  font-synthesis: none;
   -webkit-font-smoothing: antialiased;
 }
 
-a { color: inherit; }
+a { color: inherit; text-decoration-color: var(--color-rule-ctl); text-underline-offset: 0.2em; }
+a:hover { text-decoration-color: var(--color-accent); }
 
 /* Focus rings appear instantly and are never transitioned. */
-:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
-  border-radius: var(--radius-input);
-}
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 
 kbd {
+  font: inherit;
   font-size: var(--text-xs);
-  border: var(--rule-hair) solid var(--color-rule-ctl);
-  border-radius: var(--radius-input);
-  padding: 0 var(--space-2xs);
+  padding: 0 var(--space-xs);
+  border-radius: var(--radius-part);
+  background: linear-gradient(var(--metal-hi), var(--metal-lo));
+  box-shadow: var(--edge-light), var(--shadow-part);
+  color: var(--color-ink);
 }
 
+.noscript { max-width: var(--page-max); margin: 0 auto; padding: var(--space-md) var(--page-gutter); color: var(--color-muted); }
+
 /* ============================================================
-   Masthead — N9 edge-aligned. The space between is the design.
+   The night band: masthead and lede on the drawn hour.
    ============================================================ */
+
+.masthead,
+.lede { background: var(--color-band); color: var(--color-band-ink); }
 
 .masthead {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm) var(--space-lg);
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  max-width: var(--page-max);
-  margin-inline: auto;
-  padding: var(--space-lg) var(--page-gutter) var(--space-md);
-  border-bottom: var(--rule-hair) solid var(--color-rule);
+  padding: var(--space-lg) max(var(--page-gutter), calc((100% - var(--page-max)) / 2 + var(--page-gutter))) var(--space-md);
 }
 
 .wordmark {
   font-family: var(--font-display);
+  font-weight: 500;
   font-size: var(--text-md);
-  font-weight: 600;
   letter-spacing: -0.02em;
   text-decoration: none;
   white-space: nowrap;
 }
+
+.masthead__end { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-sm) var(--space-lg); }
 
 .masthead__meta {
   margin: 0;
@@ -82,22 +73,35 @@ kbd {
   flex-wrap: wrap;
   gap: var(--space-2xs) var(--space-lg);
   font-size: var(--text-xs);
-  color: var(--color-neutral);
+  font-weight: 500;
+  color: var(--color-band-muted);
   font-variant-numeric: tabular-nums;
 }
 
-.masthead__meta .is-warning { color: var(--color-accent); }
+.masthead__meta .is-warning { color: var(--color-light); }
 
-/* ============================================================
-   Lede — Index-First opens with a short paragraph. Single column,
-   stacked, no eyebrow. Bottom padding outweighs top so the opener
-   sits into the page rather than floating above it.
-   ============================================================ */
+/* Day / night: a machined pill naming the mode it switches to. */
+.mode-toggle {
+  min-height: 2.25rem;
+  padding: 0 var(--space-md);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-pill);
+  background: linear-gradient(var(--metal-hi), var(--metal-lo));
+  box-shadow: var(--edge-light), var(--shadow-part);
+  color: var(--color-ink);
+  font: 500 var(--text-xs)/1 var(--font-body);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.mode-toggle:active { transform: translateY(1px); }
 
 .lede {
-  max-width: var(--page-max);
-  margin-inline: auto;
-  padding: var(--space-xl) var(--page-gutter) var(--space-2xl);
+  padding: var(--space-2xl) max(var(--page-gutter), calc((100% - var(--page-max)) / 2 + var(--page-gutter))) var(--space-3xl);
+  margin-bottom: var(--space-2xl);
+  /* sky to land, one far row of lit windows on the horizon */
+  background:
+    radial-gradient(circle at 50% 50%, var(--color-light) 0 1px, transparent 1.5px) 0 calc(100% - 3.1rem) / 67px 6px repeat-x,
+    linear-gradient(var(--color-band) 0%, var(--color-band-2) 88%, var(--color-band) 88.2%);
 }
 
 .lede__title,
@@ -106,37 +110,31 @@ kbd {
 .lede__title {
   margin: 0 0 var(--space-md);
   font-family: var(--font-display);
+  font-weight: 400;
   font-size: var(--text-display);
-  font-weight: 600;
-  font-style: normal;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.04;
   text-wrap: balance;
   overflow-wrap: break-word;
   min-width: 0;
 }
 
-.lede__text {
-  margin: 0;
-  color: var(--color-muted);
-  font-size: var(--text-md);
-  line-height: 1.6;
-}
+.lede__text { margin: 0; color: var(--color-band-muted); font-size: var(--text-md); }
 
-/* Summary counts — typographic, not cards. Real figures from meta.json. */
+/* Counts as levels: the display face, lining and tabular. */
 .summary {
   list-style: none;
   margin: var(--space-xl) 0 0;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-sm) var(--space-xl);
+  gap: var(--space-md) var(--space-2xl);
 }
 
 .summary__item {
   display: flex;
   align-items: baseline;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
   background: none;
   border: 0;
   border-bottom: 2px solid transparent;
@@ -145,62 +143,49 @@ kbd {
   font: inherit;
   cursor: pointer;
   text-align: left;
-  transition: border-color var(--dur-micro) var(--ease-out);
+  transition: border-color var(--dur-short) var(--ease-in-out);
 }
-
-.summary__item:hover { border-bottom-color: var(--color-accent); }
+.summary__item:hover { border-bottom-color: var(--color-light); }
 .summary__item:active { transform: translateY(1px); }
-
-.summary__item[disabled] {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
+.summary__item[disabled] { opacity: 0.55; cursor: not-allowed; }
 
 .summary__n {
-  font-family: var(--font-outlier);
-  font-size: var(--text-lg);
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-xl);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums lining-nums;
 }
+.summary__item[data-digest="retirement"] .summary__n { color: var(--color-light); }
 
-.summary__item[data-digest="moved"] .summary__n { color: var(--color-signal); }
-
-/* Clickable text never wraps. Labels are short enough to hold one line. */
-.summary__label {
-  font-size: var(--text-sm);
-  color: var(--color-muted);
-  white-space: nowrap;
-}
+.summary__label { font-size: var(--text-sm); font-weight: 500; color: var(--color-band-muted); white-space: nowrap; }
 
 /* ============================================================
-   Layout — asymmetric: narrow filter rail, wide index. Never 1fr 1fr.
+   Layout: narrow filter rail, wide index.
    ============================================================ */
 
 .index-layout {
   display: grid;
-  grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
-  gap: var(--space-xl);
+  grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
+  gap: var(--space-2xl);
   max-width: var(--page-max);
   margin-inline: auto;
   padding: 0 var(--page-gutter) var(--space-3xl);
   align-items: start;
 }
 
-/* ---- Filter rail ---- */
-
-.rail {
-  position: sticky;
-  top: var(--space-md);
-  z-index: var(--z-base);
-}
+/* The rail as a machined panel, lit from above. */
+.rail { position: sticky; top: var(--space-md); z-index: var(--z-base); }
 
 .rail__inner {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
-  padding-right: var(--space-md);
-  border-right: var(--rule-hair) solid var(--color-rule);
+  padding: var(--space-lg);
+  border-radius: var(--radius-card);
+  background: linear-gradient(var(--color-paper-2), var(--color-paper-3));
+  box-shadow: var(--edge-light), var(--shadow-panel);
 }
 
 .field { border: 0; margin: 0; padding: 0; min-width: 0; }
@@ -211,134 +196,85 @@ legend.field__label {
   padding: 0;
   margin-bottom: var(--space-xs);
   font-size: var(--text-sm);
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-muted);
 }
 
 .field__input {
   width: 100%;
   min-height: var(--control-h);
-  background: var(--color-paper-2);
-  border: var(--rule-hair) solid var(--color-rule-ctl);
-  border-radius: var(--radius-input);
-  outline: 2px solid transparent;   /* reserved so focus adds no geometry */
+  border-radius: var(--radius-pill);
+  background: var(--color-paper);
+  border: var(--rule-hair) solid var(--color-rule);
+  box-shadow: var(--shadow-well);
   color: var(--color-ink);
-  font-family: var(--font-body);
+  font: inherit;
   font-size: var(--text-sm);
-  padding: var(--space-xs) var(--space-sm);
-  transition: border-color var(--dur-micro) var(--ease-out),
-              background-color var(--dur-micro) var(--ease-out);
+  padding: var(--space-xs) var(--space-md);
+  transition: border-color var(--dur-micro) var(--ease-out);
 }
+.field__input:hover { border-color: var(--color-rule-ctl); }
+.field__input::placeholder { color: var(--color-muted); }
+.field__input[disabled] { opacity: 0.55; cursor: not-allowed; }
 
-.field__input:hover { border-color: var(--color-neutral); }
-.field__input:active { background: var(--color-paper-3); }
-.field__input::placeholder { color: var(--color-neutral); }
+.field__hint { margin: var(--space-xs) 0 0; min-height: 1lh; font-size: var(--text-xs); color: var(--color-muted); }
 
-.field__input[disabled] {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-/* Reserved so an appearing hint or error never pushes the rail down. */
-.field__hint {
-  margin: var(--space-2xs) 0 0;
-  min-height: 1lh;
-  font-size: var(--text-xs);
-  color: var(--color-neutral);
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2xs);
-}
+/* Chips as machined pills; the chosen one is lit. */
+.chips { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
 
 .chip {
-  background: none;
-  border: var(--rule-hair) solid var(--color-rule-ctl);
+  min-height: 2.25rem;
+  padding: 0 var(--space-md);
   border-radius: var(--radius-pill);
-  color: var(--color-muted);
+  border: var(--rule-hair) solid var(--color-rule);
+  background: linear-gradient(var(--metal-hi), var(--metal-lo));
+  box-shadow: var(--edge-light), var(--shadow-part);
+  color: var(--color-ink-2);
+  font: 500 var(--text-xs)/1 var(--font-body);
   cursor: pointer;
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  min-height: 2rem;
-  padding: var(--space-3xs) var(--space-sm);
   white-space: nowrap;
-  transition: border-color var(--dur-micro) var(--ease-out),
-              color var(--dur-micro) var(--ease-out);
 }
-
-.chip:hover { border-color: var(--color-neutral); color: var(--color-ink); }
+.chip:hover { color: var(--color-ink); }
 .chip:active { transform: translateY(1px); }
 .chip[disabled] { opacity: 0.55; cursor: not-allowed; }
-
 .chip.is-active {
   background: var(--color-accent);
   border-color: var(--color-accent);
   color: var(--color-accent-ink);
-  font-weight: 600;
+  box-shadow: var(--edge-lit), var(--shadow-part);
 }
 
 .btn-reset,
 .btn-more {
   align-self: start;
-  min-height: var(--control-h);
-  background: none;
-  border: var(--rule-hair) solid var(--color-rule-ctl);
-  border-radius: var(--radius-input);
-  color: var(--color-muted);
+  min-height: 3.25rem;
+  padding: 0 var(--space-lg);
+  border-radius: var(--radius-pill);
+  border: var(--rule-hair) solid var(--color-rule);
+  background: linear-gradient(var(--metal-hi), var(--metal-lo));
+  box-shadow: var(--edge-light), var(--shadow-part);
+  color: var(--color-ink);
+  font: 500 var(--text-sm)/1 var(--font-body);
   cursor: pointer;
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  padding: var(--space-xs) var(--space-md);
   white-space: nowrap;
-  transition: border-color var(--dur-micro) var(--ease-out),
-              color var(--dur-micro) var(--ease-out);
 }
-
-.btn-reset:hover,
-.btn-more:hover { border-color: var(--color-accent); color: var(--color-ink); }
 .btn-reset:active,
 .btn-more:active { transform: translateY(1px); }
-
 .btn-reset[disabled],
 .btn-more[disabled] { opacity: 0.55; cursor: not-allowed; }
 
 /* ============================================================
-   Index — rows divided by hairlines. No cards, no side stripes.
-   Each row is a single column: metadata line, then title, then body.
+   Index: rules, not boxes.
    ============================================================ */
 
 .index { min-width: 0; }
+.index__count { margin: 0 0 var(--space-md); font-size: var(--text-sm); color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.index__empty { padding: var(--space-3xl) 0; color: var(--color-muted); }
+.index__more { margin-top: var(--space-xl); display: flex; justify-content: center; }
 
-.index__count {
-  margin: 0 0 var(--space-md);
-  font-size: var(--text-xs);
-  font-variant-numeric: tabular-nums;
-  color: var(--color-neutral);
-}
+.row { padding: var(--space-lg) 0; border-top: var(--rule-hair) solid var(--color-rule); min-width: 0; }
+.row:first-child { border-top: 0; padding-top: 0; }
 
-.index__empty {
-  padding: var(--space-3xl) 0;
-  color: var(--color-neutral);
-}
-
-.index__more {
-  margin-top: var(--space-xl);
-  display: flex;
-  justify-content: center;
-}
-
-.row {
-  padding: var(--space-lg) 0;
-  border-top: var(--rule-hair) solid var(--color-rule);
-  min-width: 0;
-}
-
-.row:first-child { border-top: 0; }
-
-/* Outlier role 1 of 2: the machine-metadata line. Source anchors the left
-   edge, timing anchors the right, so the row spans the column. */
 .row__meta {
   display: flex;
   flex-wrap: wrap;
@@ -346,82 +282,39 @@ legend.field__label {
   justify-content: space-between;
   gap: var(--space-2xs) var(--space-md);
   margin-bottom: var(--space-xs);
-  font-family: var(--font-outlier);
   font-size: var(--text-xs);
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
-  line-height: 1;
+  line-height: 1.3;
 }
 
 .row__meta-l,
-.row__meta-r {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-2xs) var(--space-sm);
-  min-width: 0;
-}
-
+.row__meta-r { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2xs) var(--space-md); min-width: 0; }
 .row__meta-r { justify-content: flex-end; }
 
-.row__source {
-  color: var(--color-muted);
-  overflow-wrap: anywhere;
-}
-
-.row__date { color: var(--color-neutral); }
-
+.row__source { color: var(--color-ink-2); overflow-wrap: anywhere; }
+.row__date { color: var(--color-muted); }
 .row__status { color: var(--color-muted); }
 .row__status[data-status="Rolling out"] { color: var(--color-accent); }
-.row__status[data-status="Launched"]    { color: var(--color-signal); }
-.row__status[data-status="Cancelled"]   { text-decoration: line-through; color: var(--color-neutral); }
-
-.row__flag {
-  color: var(--color-accent);
-  font-weight: 500;
-}
+.row__status[data-status="Launched"]    { color: var(--color-ink); }
+.row__status[data-status="Cancelled"]   { text-decoration: line-through; }
+.row__flag { color: var(--color-accent); }
 
 .row__title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: var(--text-md);
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
+  font-size: var(--text-lg);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  text-wrap: balance;
   overflow-wrap: break-word;
   min-width: 0;
 }
+.row__title a { text-decoration: none; }
+.row__title a:hover { text-decoration: underline; text-decoration-color: var(--color-accent); text-decoration-thickness: 1px; }
 
-/* Underline drawn with a transform, so the only animated properties on the
-   page are transform and opacity. */
-.row__title a {
-  position: relative;
-  text-decoration: none;
-}
-
-.row__title a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -2px;
-  height: var(--rule-hair);
-  background: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-  transition: transform var(--dur-short) var(--ease-out);
-}
-
-.row__title a:hover::after { transform: scaleX(1); }
-
-/* 16px floor for body prose — 13px was below the accessibility minimum and
-   was also what made the measure stop ~440px short of the column edge. */
-.row__summary {
-  margin: var(--space-xs) 0 0;
-  max-width: var(--measure);
-  color: var(--color-muted);
-  font-size: var(--text-base);
-  line-height: 1.6;
-}
+.row__summary { margin: var(--space-xs) 0 0; max-width: var(--measure); color: var(--color-muted); }
 
 .row__tags {
   list-style: none;
@@ -431,18 +324,18 @@ legend.field__label {
   margin: var(--space-sm) 0 0;
   padding: 0;
   font-size: var(--text-xs);
-  color: var(--color-neutral);
+  color: var(--color-muted);
 }
 
-/* New-to-me: elevation by lightness. Never a glow shadow on dark. */
+/* New-to-me: the soft accent wash, one part radius. */
 .row.is-new {
-  background: var(--color-paper-2);
-  box-shadow: 0 0 0 var(--space-sm) var(--color-paper-2);
-  border-radius: var(--radius-input);
+  background: var(--color-accent-soft);
+  box-shadow: 0 0 0 var(--space-md) var(--color-accent-soft);
+  border-radius: var(--radius-part);
 }
 
 /* ============================================================
-   Footer — Ft2, one line above a hairline.
+   Footer
    ============================================================ */
 
 .foot-line {
@@ -451,49 +344,23 @@ legend.field__label {
   border-top: var(--rule-hair) solid var(--color-rule);
   padding: var(--space-lg) var(--page-gutter) var(--space-2xl);
 }
-
-.foot-line p {
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2xs) var(--space-xl);
-  font-size: var(--text-xs);
-  color: var(--color-neutral);
-}
-
-.foot-line a { color: var(--color-muted); text-decoration: underline; }
-.foot-line a:hover { color: var(--color-accent); }
+.foot-line p { margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-xl); font-size: var(--text-xs); color: var(--color-muted); }
+.foot-line a { color: var(--color-ink-2); }
 
 /* ============================================================
-   Responsive — verified at 320 / 375 / 414 / 768.
-   The rail unsticks and stacks; rows are already single-column.
+   Responsive
    ============================================================ */
 
 @media (max-width: 60rem) {
-  .index-layout {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-xl);
-  }
-
+  .index-layout { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
   .rail { position: static; }
-
-  .rail__inner {
-    border-right: 0;
-    border-bottom: var(--rule-hair) solid var(--color-rule);
-    padding-right: 0;
-    padding-bottom: var(--space-lg);
-  }
 }
 
 @media (max-width: 34rem) {
-  .lede { padding-top: var(--space-lg); }
+  .lede { padding-top: var(--space-xl); }
   .summary { gap: var(--space-sm) var(--space-lg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 150ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 150ms !important;
-  }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }

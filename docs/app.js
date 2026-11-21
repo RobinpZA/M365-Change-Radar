@@ -156,6 +156,7 @@
     // Ledger line: who said it on the left, when and in what state on the
     // right, so the row occupies the full column width instead of trailing off.
     const metaRight = [];
+    if (isNew(item)) metaRight.push('<span class="row__flag">New</span>');
     if (item.isRetirement) metaRight.push('<span class="row__flag">Retiring</span>');
     if (item.status) {
       metaRight.push(`<span class="row__status" data-status="${escapeHtml(item.status)}">${escapeHtml(item.status)}</span>`);

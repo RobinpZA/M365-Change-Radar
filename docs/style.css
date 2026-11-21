@@ -327,12 +327,20 @@ legend.field__label {
   color: var(--color-muted);
 }
 
-/* New-to-me: the soft accent wash, one part radius. */
-.row.is-new {
-  background: var(--color-accent-soft);
-  box-shadow: 0 0 0 var(--space-md) var(--color-accent-soft);
-  border-radius: var(--radius-part);
+/* New-to-me: a lit sill in the gutter and a "New" flag, no wash, so runs of
+   unread rows stay separate rows. */
+.row.is-new { position: relative; }
+.row.is-new::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--space-sm));
+  top: var(--space-lg);
+  bottom: var(--space-lg);
+  width: 2px;
+  border-radius: 1px;
+  background: var(--color-accent);
 }
+.row.is-new:first-child::before { top: 0; }
 
 /* ============================================================
    Footer
